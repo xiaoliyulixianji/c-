@@ -1,14 +1,14 @@
 #include <iostream>
 #include <cmath>
 
-// ¶¨ÒåÒ»¸öÈıÎ¬ÏòÁ¿½á¹¹
+// å®šä¹‰ä¸€ä¸ªä¸‰ç»´å‘é‡ç»“æ„
 struct Vector3 {
 	double x, y, z;
 
-	// ¹¹Ôìº¯Êı
+	// æ„é€ å‡½æ•°
 	Vector3(double x = 0, double y = 0, double z = 0) : x(x), y(y), z(z) {}
 
-	// ²æ»ıÔËËã
+	// å‰ç§¯è¿ç®—
 	Vector3 cross(const Vector3& other) const {
 		return Vector3(
 			y * other.z - z * other.y,
@@ -17,17 +17,17 @@ struct Vector3 {
 		);
 	}
 
-	// µã»ıÔËËã
+	// ç‚¹ç§¯è¿ç®—
 	double dot(const Vector3& other) const {
 		return x * other.x + y * other.y + z * other.z;
 	}
 
-	// ÅĞ¶ÏÏòÁ¿ÊÇ·ñÎªÁãÏòÁ¿
+	// åˆ¤æ–­å‘é‡æ˜¯å¦ä¸ºé›¶å‘é‡
 	bool isZero() const {
 		return std::fabs(x) < 1e-6 && std::fabs(y) < 1e-6 && std::fabs(z) < 1e-6;
 	}
 
-	// ÅĞ¶ÏÏòÁ¿ÊÇ·ñÎª±êÁ¿±¶Êı
+	// åˆ¤æ–­å‘é‡æ˜¯å¦ä¸ºæ ‡é‡å€æ•°
 	bool isScalarMultipleOf(const Vector3& other) const {
 		if (isZero() || other.isZero()) return false;
 		double ratioX = x / other.x;
@@ -37,37 +37,37 @@ struct Vector3 {
 	}
 };
 
-// ÅĞ¶ÏÁ½¸ö·¨ÏòÁ¿ÊÇ·ñÆ½ĞĞ
+// åˆ¤æ–­ä¸¤ä¸ªæ³•å‘é‡æ˜¯å¦å¹³è¡Œ
 bool areParallel(const Vector3& n1, const Vector3& n2) {
-	// ²æ»ıÎªÁãÔòÆ½ĞĞ
+	// å‰ç§¯ä¸ºé›¶åˆ™å¹³è¡Œ
 	Vector3 s = n1.cross(n2);
 	return s.isZero();
 }
 
-// ÅĞ¶ÏÁ½¸ö·¨ÏòÁ¿ÊÇ·ñÖØºÏ
+// åˆ¤æ–­ä¸¤ä¸ªæ³•å‘é‡æ˜¯å¦é‡åˆ
 bool areCoincident(const Vector3& n1, const Vector3& n2) {
-	// Èç¹ûÆ½ĞĞÇÒ·½ÏòÏàÍ¬£¨»òÕßÏà·´£©£¬ÈÏÎªÖØºÏ
+	// å¦‚æœå¹³è¡Œä¸”æ–¹å‘ç›¸åŒï¼ˆæˆ–è€…ç›¸åï¼‰ï¼Œè®¤ä¸ºé‡åˆ
 	return areParallel(n1, n2) && n1.isScalarMultipleOf(n2);
 }
 
 int main() {
-	Vector3 n1(1, 1, 1);  // µÚÒ»¸ö·¨ÏòÁ¿
-	Vector3 n2(2, 2, 2);  // µÚ¶ş¸ö·¨ÏòÁ¿
+	Vector3 n1(1, 1, 1);  // ç¬¬ä¸€ä¸ªæ³•å‘é‡
+	Vector3 n2(2, 2, 2);  // ç¬¬äºŒä¸ªæ³•å‘é‡
 
-	// ÅĞ¶ÏÊÇ·ñÆ½ĞĞ
+	// åˆ¤æ–­æ˜¯å¦å¹³è¡Œ
 	if (areParallel(n1, n2)) {
-		std::cout << "Á½¸ö·¨ÏòÁ¿Æ½ĞĞ¡£" << std::endl;
+		std::cout << "ä¸¤ä¸ªæ³•å‘é‡å¹³è¡Œã€‚" << std::endl;
 	}
 	else {
-		std::cout << "Á½¸ö·¨ÏòÁ¿²»Æ½ĞĞ¡£" << std::endl;
+		std::cout << "ä¸¤ä¸ªæ³•å‘é‡ä¸å¹³è¡Œã€‚" << std::endl;
 	}
 
-	// ÅĞ¶ÏÊÇ·ñÖØºÏ
+	// åˆ¤æ–­æ˜¯å¦é‡åˆ
 	if (areCoincident(n1, n2)) {
-		std::cout << "Á½¸ö·¨ÏòÁ¿ÖØºÏ¡£" << std::endl;
+		std::cout << "ä¸¤ä¸ªæ³•å‘é‡é‡åˆã€‚" << std::endl;
 	}
 	else {
-		std::cout << "Á½¸ö·¨ÏòÁ¿²»ÖØºÏ¡£" << std::endl;
+		std::cout << "ä¸¤ä¸ªæ³•å‘é‡ä¸é‡åˆã€‚" << std::endl;
 	}
 
 	return 0;
